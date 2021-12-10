@@ -35,13 +35,25 @@ namespace ShutdownDialog
             dispatcherTimer.Interval = new TimeSpan(0,0,1);
             dispatcherTimer.Start();
         }
-
-        private void Shutdown()
+        
+        /// <summary>Executes shutdown command with parameter</summary>
+        /// <param name="mode">Mode for shut down. Valid values are "s", "r" and "l", 
+        /// where "s" = Shutdown, "r" = Restart and "l" = Logout. Default is "s"</param>
+        private void Shutdown(string mode="s")
         {
+            List<string> validModes = new List<string>() {
+                "s", "r", "l"
+            };
+
+            if(validModes.IndexOf(mode) == -1)
+            {
+                throw new ArgumentException($"Invalid mode {mode}");
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo() { 
                 WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = "cmd.exe",
-                Arguments = @"/C C:\Windows\System32\shutdown.exe /s /t 0"
+                Arguments = $@"/C C:\Windows\System32\shutdown.exe /{mode} /t 0"
             };
             Process process = new Process() {
                 StartInfo = startInfo
@@ -67,6 +79,11 @@ namespace ShutdownDialog
         private void shutDownClick(object sender, RoutedEventArgs e)
         {   
             Shutdown();
+        }
+
+        private void restartClick(object sender, RoutedEventArgs e)
+        {   
+            Shutdown("r");
         }
 
         private void cancelClick(object sender, RoutedEventArgs e)

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShutdownDialog"
         mc:Ignorable="d"
-        Title="Shutdown" Height="140" Width="250"
+        Title="Shutdown" Height="140" Width="270"
         PreviewLostKeyboardFocus="lostFocus"
         ResizeMode="NoResize">
         
@@ -31,14 +31,17 @@
             MaxWidth="190" Grid.ColumnSpan="2" />
 
         <Button x:Name="shutDownButton" Grid.Row="2" Grid.Column="1" Content="Shutdown"
-            Margin="0,15,10,0" Click="shutDownClick" IsDefault="True" />
+            Margin="0,15,5,0" Click="shutDownClick" IsDefault="True" />
         
-        <Button x:Name="cancelButton" Grid.Row="2" Grid.Column="2" Content="Cancel"
+        <Button x:Name="restartButton" Grid.Row="2" Grid.Column="2" Content="Restart"
+            Margin="0,15,5,0" Click="restartClick" />
+        
+        <Button x:Name="cancelButton" Grid.Row="2" Grid.Column="3" Content="Cancel"
             Margin="0,15,0,0" Click="cancelClick" />
     
         
-        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
             Text="Automatically shutdown after: 30 s" 
-            x:Name="countDownLabel" Margin="0,10,0,0"  />
+            x:Name="countDownLabel" Margin="0,10,0,0" HorizontalAlignment="Left" />
     </Grid>
 </Window>

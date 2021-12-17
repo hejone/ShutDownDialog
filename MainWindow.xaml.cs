@@ -26,7 +26,7 @@ namespace ShutdownDialog
         public MainWindow()
         {
             InitializeComponent();
-            Left = SystemParameters.PrimaryScreenWidth / 2;
+            Left = SystemParameters.PrimaryScreenWidth / 2 - this.Width / 2;
             Top = SystemParameters.PrimaryScreenHeight / 3;
             Topmost = true;
 

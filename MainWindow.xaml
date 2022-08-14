@@ -30,7 +30,7 @@
             MaxWidth="190" Grid.ColumnSpan="3" HorizontalAlignment="Left" />
 
         <Button x:Name="shutDownButton" Grid.Row="2" Grid.Column="1" Content="Shutdown"
-            Margin="0,15,5,0" Click="shutDownClick" IsDefault="True" />
+            Margin="0,15,5,0" Click="shutDownClick" />
         
         <Button x:Name="restartButton" Grid.Row="2" Grid.Column="2" Content="Restart"
             Margin="0,15,5,0" Click="restartClick" />

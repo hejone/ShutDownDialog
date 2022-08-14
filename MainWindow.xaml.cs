@@ -22,11 +22,29 @@ namespace ShutdownDialog
     /// </summary>
     public partial class MainWindow : Window
     {   
-        private int timer = 10;
-        private string countDownText = "Automatically shutdown after: ";
+        private int timerStartValue = 10;
+        private int timer;
+        private string defaultMode = "s";
+        private string countDownText = "Automatically {0} after: ";
         public MainWindow()
-        {
+        {   
             InitializeComponent();
+            Button defaultButton = shutDownButton;
+            string windowText = "shutdown";
+            CommandlineArgs cla = new CommandlineArgs();
+            if(cla.ReadArgs.ContainsKey("time")) {
+                timerStartValue = int.Parse(cla.ReadArgs["time"]);
+            } 
+            else if(cla.ReadArgs.ContainsKey("default")) {
+                defaultMode = cla.ReadArgs["default"];
+                if (defaultMode == "restart") {
+                    defaultButton = restartButton;
+                    windowText = "restart";
+                }
+            }
+            defaultButton.IsDefault = true;
+            countDownText = string.Format(countDownText, windowText);
+            timer = timerStartValue;
             Left = SystemParameters.PrimaryScreenWidth / 2 - this.Width / 2;
             Top = SystemParameters.PrimaryScreenHeight / 3;
             Topmost = true;
@@ -70,6 +88,12 @@ namespace ShutdownDialog
             countDownLabel.Text = $"{countDownText} {String.Format("{0:00}", timer)} s";
             if(timer == 0) {
                 Shutdown();
+            } 
+            else if(timer < 0) {
+                // If the timer somehow goes under 0, reset it!
+                // This can happen if the uset puts the computer to sleep during the countdown,
+                // The Shutdown command cannot be executed during sleep procedures
+                timer = timerStartValue;
             }
         }
 

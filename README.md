@@ -14,4 +14,4 @@ This software has following command line arguments:
 - `-t` or `--time` can be used to set the automatic executable timer time. The executed command can selected with `--default`.
   - The valid values are  the range \[1..180\] s. The default value is 10.
 - `--default` can be used to select the default command to run. Currently only `shutdown` and `restart` can be chosen.
-  - The valid values are  `shutdown` and `restart`. The default is `restart`.
+  - The valid values are  `shutdown` and `restart`. The default is `shutdown`.
